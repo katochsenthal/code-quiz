@@ -13,24 +13,26 @@
       <h2 class="timerDisplay">Time:<span>00:30</span></h2>
     </div>
     <!-- start screen -->
-    <div class="startScreen">
+    <div id="startScreen">
       <h2 class="quizTitle">Coding Quiz Challenge</h2>
       <p class="quizRules">
         Try to answer the following code-related questions within the time limit
         above. Keep in mind that incorrect answers will penalize your score/time
         by ten seconds!
       </p>
-      <button class="startBtn" type="submit">Start Quiz</button>
+      <button id="startBtn" type="submit">Start Quiz</button>
     </div>
 
     <!-- questions -->
-    <div class="question-container">
-      <h2>Question</h2>
+    <div id="question-container" class="hide">
+      <h2 class="question-header">
+        Arrays in Javascript can be used to store ________.
+      </h2>
       <div class="answerOptions">
-        <button class="btn">Option 1</button>
-        <button class="btn">Option 2</button>
-        <button class="btn">Option 3</button>
-        <button class="btn">Option 4</button>
+        <button class="btn">Numbers and Strings</button>
+        <button class="btn">Booleans</button>
+        <button class="btn">Other Arrays</button>
+        <button class="btn">All of the above</button>
       </div>
     </div>
     <script src="assets/js/script.js"></script>

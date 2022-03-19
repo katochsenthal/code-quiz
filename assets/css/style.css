@@ -38,11 +38,12 @@ button:hover {
 
 /* styling questions */
 .question-container {
-  width: 800px;
-  max-width: 80%;
+  margin: auto;
+  display: block;
 }
-.question-1 {
-  text-align: center;
+
+.question-header {
+  padding-bottom: 10px;
 }
 
 .answerOptions {

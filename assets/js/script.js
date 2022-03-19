@@ -1,3 +1,25 @@
+var startScreen = document.getElementById("startScreen");
+var startButton = document.getElementById("startBtn");
+
+var questionContainer = document.getElementById("question-container");
+
+startButton.addEventListener("click", startGame);
+
+// start game function
+function startGame() {
+  // hiding the start screen
+  this.parentElement.style.display = "none";
+}
+
+// questions displayed
+function nextQuestion() {}
+
+// when a answer is choosen
+function selectAnswer() {}
+
+// save scores
+function saveScores() {}
+
 // Timer function
 function timer() {
   var seconds = 30;
