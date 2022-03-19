@@ -1,5 +1,62 @@
 var startScreen = document.getElementById("startScreen");
 var startButton = document.getElementById("startBtn");
+var myQuestions = [
+  {
+    question: "Commonly used data types do NOT include:",
+    answers: {
+      a: "Strings",
+      b: "Booleans",
+      c: "Alerts",
+      d: "Numbers",
+    },
+    correctAnswer: "c",
+  },
+  {
+    question: "The condition in an if/else statement is enclosed in:",
+    answers: {
+      a: "Quotes",
+      b: "Parenthesis",
+      c: "Curly Brackets",
+      d: "Square Brackets",
+    },
+    correctAnswer: "b",
+  },
+  {
+    question: "Arrays in JavaScript can be used to store:",
+  },
+  {
+    question: "Arrays in JavaScript can be used to store:",
+    answers: {
+      a: "Numbers and Strings",
+      b: "Other Arrays",
+      c: "Boolean",
+      d: "all of the above",
+    },
+    correctAnswer: "d",
+  },
+  {
+    question:
+      "String values must be enclosed within __ when being assigned to variables",
+    answers: {
+      a: "Commas",
+      b: "Curly Brackets",
+      c: "Quotes",
+      d: "Parenthesis",
+    },
+    correctAnswer: "c",
+  },
+  {
+    question:
+      "A very useful tool used during development and debugging for printing content to the debugger is:",
+    answers: {
+      a: "JavaScript",
+      b: "Console.Log",
+      c: "Terminal Bash",
+      d: "for loops",
+    },
+    correctAnswer: "b",
+  },
+];
 
 var questionContainer = document.getElementById("question-container");
 
@@ -9,6 +66,23 @@ startButton.addEventListener("click", startGame);
 function startGame() {
   // hiding the start screen
   this.parentElement.style.display = "none";
+
+  // Timer function
+  var timeLeft = 30;
+  var elem = document.getElementById("timer");
+
+  var timerId = setInterval(countdown, 1000);
+
+  function countdown() {
+    if (timeLeft == -1) {
+      clearTimeout(timerId);
+      saveScores();
+    } else {
+      elem.innerHTML = "Time :" + timeLeft;
+      +"seconds";
+      timeLeft--;
+    }
+  }
 }
 
 // questions displayed
@@ -19,21 +93,6 @@ function selectAnswer() {}
 
 // save scores
 function saveScores() {}
-
-// Timer function
-function timer() {
-  var seconds = 30;
-
-  var interval = setInterval(function () {
-    document.querySelector("timerDisplay").innerHTML = "00:" + seconds;
-    seconds--;
-
-    if (seconds < 0) {
-      clearInterval(interval);
-      console.log("Ding!");
-    }
-  }, 1000);
-}
 
 // questions
 
