@@ -1,4 +1,19 @@
-console.log("Hello!");
+// Timer function
+function timer() {
+  var seconds = 30;
+
+  var interval = setInterval(function () {
+    document.querySelector("timerDisplay").innerHTML = "00:" + seconds;
+    seconds--;
+
+    if (seconds < 0) {
+      clearInterval(interval);
+      console.log("Ding!");
+    }
+  }, 1000);
+}
+
+// questions
 
 // GIVEN I am taking a code quiz
 // WHEN I click the start button

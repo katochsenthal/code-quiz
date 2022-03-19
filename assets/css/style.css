@@ -1,20 +1,24 @@
+* {
+  padding: 0;
+  margin: 0;
+}
 /* styled div */
-div {
+/* .startScreen {
   position: absolute;
   top: 50%;
   left: 50%;
   margin-top: -50px;
-  margin-left: -50px;
+  margin-left: -100px;
   width: 450px;
   height: 100px;
-}
+} */
 
 /* styling buttons */
 button {
   background-color: #000080;
   border: none;
   color: white;
-  padding: 15px 32px;
+  padding: 15px 25px;
   text-align: center;
   text-decoration: none;
   border-radius: 8px;
@@ -24,4 +28,25 @@ button {
 
 button:hover {
   background-color: #6a0dad;
+}
+
+/* timer */
+.timer {
+  top: 0;
+  left: 0;
+}
+
+/* styling questions */
+.question-container {
+  width: 800px;
+  max-width: 80%;
+}
+.question-1 {
+  text-align: center;
+}
+
+.answerOptions {
+  width: 250px;
+  display: grid;
+  gap: 10px;
 }
