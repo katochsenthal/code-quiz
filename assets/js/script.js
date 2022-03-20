@@ -5,28 +5,24 @@ var startBtnEl = document.getElementById("start-btn");
 var quizEl = document.getElementById("quiz");
 var quizAnswers = document.getElementById("answerOptions");
 var saveScores = document.getElementById("saveScores");
-var highScores = document.getElementById("highScores");
+var highScoresBtn = document.getElementById("highScores");
 var goBackBtn = document.getElementById("goBack");
 var clearScoresBtn = document.getElementById("clearScores");
 var questionEl = document.getElementById("question");
 var userScore = document.getElementById("score");
+var scores = document.getElementById("scores");
 
 var highScoreInput = [];
 var initials = "";
 var currentQuestion = 0;
 var totalTime = 75;
 var timePassed = 0;
+var score = 0;
+var interval;
 
-quizEl.style.display = "none";
-saveScore.style.display = "none";
-highScores.style.display = "none";
 // GIVEN I am taking a code quiz
 // WHEN I click the start button
 // THEN a timer starts and I am presented with a question
-startBtnEl.addEventListener("click", function () {
-  startScreen.style.display = "none";
-  quizEl.style.display = "block";
-});
 
 function startTimer() {
   timer.textContent = totalTime;
@@ -38,6 +34,14 @@ function startTimer() {
       nextQuestion();
     }
   }, 1000);
+}
+
+function showQuestion() {
+  questionEl.textContent = questions[currentQuestion].question;
+  for (var i = 0; i < answerOptions.children.length; i++) {
+    answerOptions.children[i].children[0].textContent =
+      questions[currentQuestion].choices[i];
+  }
 }
 
 function stopTimer() {
@@ -58,6 +62,8 @@ function nextQuestion() {
   }
 }
 
+// check question's answers
+
 function checkAnswer(answer) {
   if (
     questions[currentQuestion].answer ==
@@ -71,19 +77,47 @@ function checkAnswer(answer) {
   }
 }
 
-// message dislayed upon correct and wrong choice
-function showMessage(m) {
+// message displayed upon correct and wrong choice
+function showMessage(message) {
   var messHr = document.createElement("hr");
   var messEl = document.createElement("div");
+  messEl.textContent = message;
+  startScreen.appendChild(messHr);
+  startScreen.appendChild(messEl);
+  setTimeout(function () {
+    messHr.remove();
+    messEl.remove();
+  }, 2000);
 }
 
-function showQuestion() {
-  questionEl.textContent = questions[currentQuestion].question;
-  for (var i = 0; i < answerOptions.children.length; i++) {
-    answerOptions.children[i].children[0].textContent =
-      questions[currentQuestion].choices[i];
-  }
+//hides element
+function hide(el) {
+  el.style.display = "none";
 }
+
+// display element
+function show(element) {
+  el.style.display = "block";
+}
+
+// reset
+
+function reset() {
+  score = 0;
+  currentQuestion = 0;
+  timePassed = 0;
+  timer.textContent = 0;
+}
+
+// // show highscoresTitle in  local storage
+// function renderHighScores() {
+//   scores.innerHTML = "";
+// var highScores = document.getElementsByClassName("high-score");
+// show(highScores);
+//   highScores = JSON.parse(localStorage.getItem("scores"));
+//   for(var i =0; i<highScores.length; i++){
+
+//   }
 
 // WHEN I answer a question
 // THEN I am presented with another question
