@@ -1,64 +1,18 @@
 var startScreen = document.getElementById("startScreen");
 var startButton = document.getElementById("startBtn");
-var myQuestions = [
-  {
-    question: "Commonly used data types do NOT include:",
-    answers: {
-      a: "Strings",
-      b: "Booleans",
-      c: "Alerts",
-      d: "Numbers",
-    },
-    correctAnswer: "c",
-  },
-  {
-    question: "The condition in an if/else statement is enclosed in:",
-    answers: {
-      a: "Quotes",
-      b: "Parenthesis",
-      c: "Curly Brackets",
-      d: "Square Brackets",
-    },
-    correctAnswer: "b",
-  },
-  {
-    question: "Arrays in JavaScript can be used to store:",
-  },
-  {
-    question: "Arrays in JavaScript can be used to store:",
-    answers: {
-      a: "Numbers and Strings",
-      b: "Other Arrays",
-      c: "Boolean",
-      d: "all of the above",
-    },
-    correctAnswer: "d",
-  },
-  {
-    question:
-      "String values must be enclosed within __ when being assigned to variables",
-    answers: {
-      a: "Commas",
-      b: "Curly Brackets",
-      c: "Quotes",
-      d: "Parenthesis",
-    },
-    correctAnswer: "c",
-  },
-  {
-    question:
-      "A very useful tool used during development and debugging for printing content to the debugger is:",
-    answers: {
-      a: "JavaScript",
-      b: "Console.Log",
-      c: "Terminal Bash",
-      d: "for loops",
-    },
-    correctAnswer: "b",
-  },
-];
 
-var questionContainer = document.getElementById("question-container");
+// question div's
+var question1 = document.querySelector(".question-1");
+var question2 = document.querySelector(".question-2");
+var question3 = document.querySelector(".question-3");
+var question4 = document.querySelector(".question-4");
+var question5 = document.querySelector(".question-5");
+
+question1.style.display = "none";
+question2.style.display = "none";
+question3.style.display = "none";
+question4.style.display = "none";
+question5.style.display = "none";
 
 startButton.addEventListener("click", startGame);
 
@@ -66,6 +20,12 @@ startButton.addEventListener("click", startGame);
 function startGame() {
   // hiding the start screen
   this.parentElement.style.display = "none";
+
+  question1.style.display = "block";
+  question2.style.display = "none";
+  question3.style.display = "none";
+  question4.style.display = "none";
+  question5.style.display = "none";
 
   // Timer function
   var timeLeft = 30;
@@ -83,7 +43,54 @@ function startGame() {
       timeLeft--;
     }
   }
+  questionsContainer.style.display = "block";
 }
+
+var answerOptions1 = document.querySelector(".answerOptions-1");
+
+answerOptions1.addEventListener("click", function () {
+  question1.style.display = "none";
+  question2.style.display = "inline";
+  question3.style.display = "none";
+  question4.style.display = "none";
+  question5.style.display = "none";
+});
+
+var answerOptions2 = document.querySelector(".answerOptions-2");
+
+answerOptions2.addEventListener("click", function () {
+  question1.style.display = "none";
+  question2.style.display = "none";
+  question3.style.display = "block";
+  question4.style.display = "none";
+  question5.style.display = "none";
+});
+
+var answerOptions3 = document.querySelector(".answerOptions-3");
+
+answerOptions3.addEventListener("click", function () {
+  question1.style.display = "none";
+  question2.style.display = "none";
+  question3.style.display = "none";
+  question4.style.display = "block";
+  question5.style.display = "none";
+});
+
+var answerOptions4 = document.querySelector(".answerOptions-4");
+
+answerOptions4.addEventListener("click", function () {
+  question1.style.display = "none";
+  question2.style.display = "none";
+  question3.style.display = "none";
+  question4.style.display = "none";
+  question5.style.display = "block";
+});
+
+var answerOptions5 = document.querySelector(".answerOption-5");
+
+answerOptions5.addEventListener("click", function () {
+  // if any options are clicked, return the save scores screen
+});
 
 // questions displayed
 function nextQuestion() {}
