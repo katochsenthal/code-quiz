@@ -4,11 +4,12 @@ var startScreen = document.getElementById("startScreen");
 var startBtnEl = document.getElementById("start-btn");
 var quizEl = document.getElementById("quiz");
 var quizAnswers = document.getElementById("answerOptions");
-var saveScore = document.getElementById("saveScores");
+var saveScores = document.getElementById("saveScores");
 var highScores = document.getElementById("highScores");
 var goBackBtn = document.getElementById("goBack");
 var clearScoresBtn = document.getElementById("clearScores");
 var questionEl = document.getElementById("question");
+var userScore = document.getElementById("score");
 
 var highScoreInput = [];
 var initials = "";
@@ -26,6 +27,55 @@ startBtnEl.addEventListener("click", function () {
   startScreen.style.display = "none";
   quizEl.style.display = "block";
 });
+
+function startTimer() {
+  timer.textContent = totalTime;
+  interval = setInterval(function () {
+    timePassed++;
+    timer.textContent = totalTime - timePassed;
+    if (timePassed >= totalTime) {
+      currentQuestion = questions.length;
+      nextQuestion();
+    }
+  }, 1000);
+}
+
+function stopTimer() {
+  clearInterval(interval);
+}
+
+function nextQuestion() {
+  currentQuestion++;
+  if (currentQuestion < questions.length) {
+    showQuestion();
+  } else {
+    stopTimer();
+    if (totalTime - timePassed > 0) score += totalTime - timePassed;
+    userScore.textContent = score;
+    hide(quizEl);
+    show(saveScores);
+    timer.textContent = 0;
+  }
+}
+
+function checkAnswer(answer) {
+  if (
+    questions[currentQuestion].answer ==
+    questions[currentQuestions.choices[answer.id]]
+  ) {
+    score += 5;
+    showMessage("correct!");
+  } else {
+    timePassed += 10;
+    showMessage("wrong");
+  }
+}
+
+// message dislayed upon correct and wrong choice
+function showMessage(m) {
+  var messHr = document.createElement("hr");
+  var messEl = document.createElement("div");
+}
 
 function showQuestion() {
   questionEl.textContent = questions[currentQuestion].question;
