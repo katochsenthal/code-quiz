@@ -1,18 +1,20 @@
-var highScores = document.getElementsByClassName("high-score");
-var timer = document.getElementById("timer");
 var startScreen = document.getElementById("startScreen");
 var startBtnEl = document.getElementById("start-btn");
 var quizEl = document.getElementById("quiz");
 var quizAnswers = document.getElementById("answerOptions");
 var saveScores = document.getElementById("saveScores");
+var initial = document.getElementById("initials");
+var submitInitial = document.getElementById("submitInitials");
 var highScoresBtn = document.getElementById("highScores");
 var goBackBtn = document.getElementById("goBack");
 var clearScoresBtn = document.getElementById("clearScores");
 var questionEl = document.getElementById("question");
 var userScore = document.getElementById("score");
-var scores = document.getElementById("scores");
+var scoresEl = document.getElementById("scores");
+var timer = document.getElementById("timer");
+var highScores = document.getElementsById("high-score");
 
-var highScoreInput = [];
+var highScores = [];
 var initials = "";
 var currentQuestion = 0;
 var totalTime = 75;
@@ -39,8 +41,9 @@ function startTimer() {
 function showQuestion() {
   questionEl.textContent = questions[currentQuestion].question;
   for (var i = 0; i < answerOptions.children.length; i++) {
-    answerOptions.children[i].children[0].textContent =
-      questions[currentQuestion].choices[i];
+    answerOptions.children[i].children[0].textContent = `${i + 1}: ${
+      questions[currentQuestion].choices[i]
+    }`;
   }
 }
 
@@ -82,8 +85,8 @@ function showMessage(message) {
   var messHr = document.createElement("hr");
   var messEl = document.createElement("div");
   messEl.textContent = message;
-  startScreen.appendChild(messHr);
-  startScreen.appendChild(messEl);
+  document.querySelector(".jumbotron").appendChild(messHr);
+  document.querySelector(".jumbotron").appendChild(messEl);
   setTimeout(function () {
     messHr.remove();
     messEl.remove();
@@ -95,7 +98,7 @@ function hide(el) {
   el.style.display = "none";
 }
 
-// display element
+// displays element
 function show(element) {
   el.style.display = "block";
 }
@@ -109,21 +112,66 @@ function reset() {
   timer.textContent = 0;
 }
 
-// // show highscoresTitle in  local storage
-// function renderHighScores() {
-//   scores.innerHTML = "";
-// var highScores = document.getElementsByClassName("high-score");
-// show(highScores);
-//   highScores = JSON.parse(localStorage.getItem("scores"));
-//   for(var i =0; i<highScores.length; i++){
+// high scores stores in local storage
 
-//   }
+function showHighScores() {
+  scoresEl.innerHTML = "";
+  show(highScores);
+  high_Scores = JSON.parse(localStorage.getItem("scores"));
+  for (let i = 0; i < hight_Scores.length; i++) {
+    var scoreItem = document.createElement("div");
+    scoreItem.className += "row";
+    scoreItem.setAttribute("style", "background-color:yellow;");
+    scoreItem.textContent = `${i + 1}. ${high_Scores[i].username} - ${
+      high_Scores[i].userScore
+    }`;
+    scoresEl.appendChild(scoreItem);
+  }
+}
 
-// WHEN I answer a question
-// THEN I am presented with another question
-// WHEN I answer a question incorrectly
-// THEN time is subtracted from the clock
-// WHEN all questions are answered or the timer reaches 0
-// THEN the game is over
-// WHEN the game is over
-// THEN I can save my initials and score
+highScoresBtn.addEventListener("click", function () {
+  hide(startScreen);
+  hide(quizEl);
+  renderHighScores();
+  stopTimer();
+  reset();
+});
+
+startBtnEl.addEventListen("click", function () {
+  hide(startScreen);
+  startTimer();
+  showQuestion();
+  show(quizEl);
+});
+
+quizAnswers.addEventListener("click", function (event) {
+  if (event.target.matches("button")) {
+    checkAnswer(e.target.value);
+    nextQuestion();
+  }
+});
+
+submitInitial.addEventListener("click", function () {
+  var initValue = initial.value.trim();
+  if (initValue) {
+    var userScore = { username: initValue, userScore: score };
+    initial.value = "";
+    highScores = JSON.parse(localStorage.getItem("scores")) || [];
+    highScores.push(userScore);
+    localStorage.setItem("scores", JSON.stringify(highScores));
+    hide(saveScores);
+    showHighScores();
+    reset();
+  }
+});
+
+goBackBtn.addEventListener("click", function () {
+  hide(saveScores);
+  show(startScreen);
+});
+
+clearScoresBtn.addEventListener("click", function () {
+  saveScores = [];
+  localStorage.removeItem("scores", JSON.stringify(saveScores));
+  showHighScores();
+});
