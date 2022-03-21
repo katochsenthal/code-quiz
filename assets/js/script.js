@@ -1,4 +1,6 @@
-// 1st page
+// 1st
+console.log("Hello!");
+
 var startScreenEl = document.querySelector("#startScreen");
 var startBtnEl = document.querySelector("#startQuiz");
 
@@ -50,9 +52,8 @@ function nextQuestion() {
     showQuestion();
   } else {
     stopTimer();
-    if (totalTime - timePassed > 0);
-    score += totalTime - timePassed;
-    userScore.textContent = score;
+    if (totalTime - timePassed > 0) score += totalTime - timePassed;
+    userScoreEl.textContent = score;
     hide(quizEl);
     show(saveScoresEl);
     timerEl.textContent = 0;
@@ -62,7 +63,7 @@ function nextQuestion() {
 // check question's answers
 
 function checkAnswer(answer) {
-  if (questions[currentQ].answer == questions[currentQ.choices[answer.id]]) {
+  if (questions[currentQ].answer == questions[currentQ].choices[answer.id]) {
     score += 5;
     showMessage("correct!");
   } else {
@@ -105,7 +106,7 @@ function reset() {
 
 function showQuestion() {
   questionEl.textContent = questions[currentQ].question;
-  for (var i = 0; i < answerOptions.children.length; i++) {
+  for (var i = 0; i < quizAnswersEl.children.length; i++) {
     quizAnswersEl.children[i].children[0].textContent = `${i + 1}: ${
       questions[currentQ].choices[i]
     }`;
@@ -118,7 +119,7 @@ function showHighScores() {
   scoresEl.innerHTML = "";
   show(highScoresEl);
   highScores = JSON.parse(localStorage.getItem("scores"));
-  for (let i = 0; i < hightScores.length; i++) {
+  for (let i = 0; i < highScores.length; i++) {
     var scoreItem = document.createElement("div");
     scoreItem.className += "row";
     console.log(scoreItem);
@@ -139,7 +140,7 @@ viewHScoresBtnEl.addEventListener("click", function () {
   reset();
 });
 
-startBtnEl.addEventListen("click", function () {
+startBtnEl.addEventListener("click", function () {
   hide(startScreenEl);
   startTimer();
   showQuestion();
